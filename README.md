@@ -341,6 +341,12 @@ python -c "from app import create_app; app = create_app(); app.run(debug=True)"
 - Implement proper error handling and logging
 - Use WTForms for form validation
 
+### Front-End Theme
+- Main styling lives in `app/static/css/main.css`.
+- The redesign keeps Bootstrap and existing Jinja bindings in place, so no asset build step is required.
+- Run the app normally with `python app.py`; Flask serves the updated CSS and templates from `app/static` and `app/templates`.
+- Updated user-facing screens include the shared navigation, home, market list, stock detail chart surface, portfolio, orders, trade ticket, cash, and auth pages.
+
 ### Database Migrations
 ```bash
 # Create new migration

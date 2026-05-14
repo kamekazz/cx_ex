@@ -1,47 +1,57 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-12">
-        <div class="jumbotron bg-light p-5 rounded">
-            <h1 class="display-4">ZEBRAT TRADING</h1>
-            <p class="lead">Practice trading with virtual money in a realistic market environment.</p>
-            <hr class="my-4">
-            <p>This is a simulated trading platform for educational purposes only. No real money is involved.</p>
-            {% if not current_user.is_authenticated %}
-                <a class="btn btn-primary btn-lg me-2" href="{{ url_for('auth.register') }}" role="button">Get Started</a>
-                <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('market.stocks') }}" role="button">View Market</a>
-            {% else %}
-                <a class="btn btn-primary btn-lg me-2" href="{{ url_for('market.stocks') }}" role="button">Start Trading</a>
-                <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('portfolio.index') }}" role="button">View Portfolio</a>
-            {% endif %}
+<section class="hero-panel">
+    <div class="page-kicker">Paper trading simulator</div>
+    <h1>Trade the market without risking real money.</h1>
+    <p class="hero-copy mt-3">
+        Practice with simulated cash, live-moving prices, candlestick charts, portfolio P&L, and order history in a cleaner trading workspace.
+    </p>
+    <div class="d-flex flex-wrap gap-2 mt-4">
+        {% if not current_user.is_authenticated %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}" role="button">Get Started</a>
+            <a class="btn btn-outline-light btn-lg" href="{{ url_for('market.stocks') }}" role="button">View Market</a>
+        {% else %}
+            <a class="btn btn-primary btn-lg" href="{{ url_for('market.stocks') }}" role="button">Start Trading</a>
+            <a class="btn btn-outline-light btn-lg" href="{{ url_for('portfolio.index') }}" role="button">View Portfolio</a>
+        {% endif %}
+    </div>
+    <div class="hero-tape">
+        <div class="ticker-chip">
+            <strong>Live Prices</strong>
+            <span>5 second refresh</span>
+        </div>
+        <div class="ticker-chip">
+            <strong>Market Orders</strong>
+            <span>Buy and sell flows</span>
+        </div>
+        <div class="ticker-chip">
+            <strong>Portfolio P&L</strong>
+            <span>Cash and positions</span>
         </div>
     </div>
-</div>
+</section>
 
 <div class="row mt-4">
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Real-Time Prices</h5>
-                <p class="card-text">Experience live market simulation with prices that update every few seconds during market hours.</p>
-            </div>
+        <div class="metric-card">
+            <div class="metric-label">Market data</div>
+            <h5 class="mt-2">Real-time prices</h5>
+            <p class="text-muted mb-0">Experience live market simulation with prices that update every few seconds during market hours.</p>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Portfolio Tracking</h5>
-                <p class="card-text">Monitor your positions, track P&L, and analyze your trading performance over time.</p>
-            </div>
+        <div class="metric-card">
+            <div class="metric-label">Performance</div>
+            <h5 class="mt-2">Portfolio tracking</h5>
+            <p class="text-muted mb-0">Monitor your positions, track P&L, and analyze your trading performance over time.</p>
         </div>
     </div>
     <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Market Orders</h5>
-                <p class="card-text">Place buy and sell orders that execute at current market prices when the market is open.</p>
-            </div>
+        <div class="metric-card">
+            <div class="metric-label">Execution</div>
+            <h5 class="mt-2">Market orders</h5>
+            <p class="text-muted mb-0">Place buy and sell orders that execute at current market prices when the market is open.</p>
         </div>
     </div>
 </div>

@@ -8,46 +8,54 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">ZEBRAT TRADING</a>
-            
-            {% if market_state %}
-            <span class="navbar-text me-3">
-                Market: 
-                <span class="badge bg-{{ 'success' if market_state.is_open else 'danger' }}">
-                    {{ 'OPEN' if market_state.is_open else 'CLOSED' }}
-                </span>
-                {% if market_state.emergency_close %}
-                <span class="badge bg-warning text-dark">EMERGENCY</span>
-                {% endif %}
-            </span>
-            {% endif %}
-            
-            <div class="navbar-nav ms-auto">
-                {% if current_user.is_authenticated %}
-                    <a class="nav-link" href="{{ url_for('market.stocks') }}">Stocks</a>
-                    <a class="nav-link" href="{{ url_for('trading.orders') }}">Orders</a>
-                    <a class="nav-link" href="{{ url_for('portfolio.index') }}">Portfolio</a>
-                    <a class="nav-link" href="{{ url_for('cash.index') }}">Cash</a>
-                    {% if current_user.is_admin() %}
-                        <a class="nav-link text-warning" href="{{ url_for('admin.index') }}">Admin</a>
+    <nav class="navbar navbar-expand-lg navbar-dark trading-navbar">
+        <div class="container-fluid px-lg-4">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="{{ url_for('main.index') }}">
+                <span class="brand-mark">ZT</span>
+                <span>ZEBRAT</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavigation" aria-controls="mainNavigation" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                {% if market_state %}
+                <div class="market-pill ms-lg-4 my-3 my-lg-0 {{ 'market-open' if market_state.is_open else 'market-closed' }}">
+                    <span class="market-dot {{ 'is-open' if market_state.is_open else 'is-closed' }}"></span>
+                    <span>Market {{ 'Open' if market_state.is_open else 'Closed' }}</span>
+                    {% if market_state.emergency_close %}
+                    <span class="badge bg-warning text-dark ms-2">Emergency</span>
                     {% endif %}
-                    <a class="nav-link" href="{{ url_for('auth.logout') }}">Logout ({{ current_user.email }})</a>
-                {% else %}
-                    <a class="nav-link" href="{{ url_for('market.stocks') }}">Stocks</a>
-                    <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
-                    <a class="nav-link" href="{{ url_for('auth.register') }}">Register</a>
+                </div>
                 {% endif %}
+
+                <div class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+                    {% if current_user.is_authenticated %}
+                        <a class="nav-link" href="{{ url_for('market.stocks') }}">Stocks</a>
+                        <a class="nav-link" href="{{ url_for('trading.orders') }}">Orders</a>
+                        <a class="nav-link" href="{{ url_for('portfolio.index') }}">Portfolio</a>
+                        <a class="nav-link" href="{{ url_for('cash.index') }}">Cash</a>
+                        {% if current_user.is_admin() %}
+                            <a class="nav-link admin-link" href="{{ url_for('admin.index') }}">Admin</a>
+                        {% endif %}
+                        <span class="nav-user d-none d-lg-inline">{{ current_user.email }}</span>
+                        <a class="btn btn-sm btn-outline-light nav-cta" href="{{ url_for('auth.logout') }}">Logout</a>
+                    {% else %}
+                        <a class="nav-link" href="{{ url_for('market.stocks') }}">Stocks</a>
+                        <a class="nav-link" href="{{ url_for('auth.login') }}">Login</a>
+                        <a class="btn btn-sm nav-cta" href="{{ url_for('auth.register') }}">Register</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="app-shell container-fluid px-3 px-lg-4 py-4">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show app-alert" role="alert">
                         {{ message }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
