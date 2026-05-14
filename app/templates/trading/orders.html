@@ -3,8 +3,12 @@
 {% block title %}My Orders - ZEBRAT TRADING{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>My Orders</h2>
+<div class="page-header d-flex justify-content-between align-items-center mobile-stack">
+    <div>
+        <div class="page-kicker">Orders</div>
+        <h2 class="mb-1">Order history</h2>
+        <p class="mb-0 text-white-50">Monitor queued, executed, canceled, and rejected simulated orders.</p>
+    </div>
     <a href="{{ url_for('trading.place_order') }}" class="btn btn-primary">Place New Order</a>
 </div>
 
@@ -60,7 +64,7 @@
     </table>
 </div>
 {% else %}
-<div class="text-center py-5">
+<div class="empty-state">
     <h4 class="text-muted">No orders yet</h4>
     <p>Place your first order to start trading.</p>
     <a href="{{ url_for('trading.place_order') }}" class="btn btn-primary">Place Order</a>

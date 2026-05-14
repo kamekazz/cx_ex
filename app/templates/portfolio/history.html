@@ -3,8 +3,12 @@
 {% block title %}Trade History - ZEBRAT TRADING{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Trade History</h2>
+<div class="page-header d-flex justify-content-between align-items-center mobile-stack">
+    <div>
+        <div class="page-kicker">Trades</div>
+        <h2 class="mb-1">Trade history</h2>
+        <p class="mb-0 text-white-50">Audit every executed trade with timestamps, order IDs, and total value.</p>
+    </div>
     <a href="{{ url_for('portfolio.index') }}" class="btn btn-secondary">← Back to Portfolio</a>
 </div>
 
@@ -45,7 +49,7 @@
     </table>
 </div>
 {% else %}
-<div class="text-center py-5">
+<div class="empty-state">
     <h4 class="text-muted">No trades yet</h4>
     <p>Your executed trades will appear here.</p>
     <a href="{{ url_for('market.stocks') }}" class="btn btn-primary">Start Trading</a>

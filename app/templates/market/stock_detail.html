@@ -6,7 +6,7 @@
 <!-- Header with Stock Info and Quick Actions -->
 <div class="row mb-4">
     <div class="col-12">
-        <div class="card bg-dark text-white">
+        <div class="card cash-balance-card">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-6">
@@ -30,7 +30,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
                         {% if current_user.is_authenticated %}
                             <a href="{{ url_for('trading.place_order') }}?stock_id={{ stock.id }}" class="btn btn-success me-2">
                                 <i class="fa fa-plus"></i> Buy {{ stock.ticker }}
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="card-body p-0">
-                <div id="chart-container" style="height: 500px; position: relative;">
+                <div id="chart-container" class="chart-frame" style="height: 500px; position: relative;">
                     <div id="loading-chart" class="d-flex align-items-center justify-content-center" style="height: 500px;">
                         <div class="text-center">
                             <div class="spinner-border text-primary" role="status">
@@ -301,14 +301,14 @@ function renderChart(data) {
                 label: `${data.stock.ticker} Price`,
                 data: chartData,
                 borderColor: {
-                    up: '#26a69a',
-                    down: '#ef5350',
-                    unchanged: '#999'
+                    up: '#00c805',
+                    down: '#ff4d4f',
+                    unchanged: '#667168'
                 },
                 backgroundColor: {
-                    up: 'rgba(38, 166, 154, 0.1)',
-                    down: 'rgba(239, 83, 80, 0.1)',
-                    unchanged: 'rgba(153, 153, 153, 0.1)'
+                    up: 'rgba(0, 200, 5, 0.12)',
+                    down: 'rgba(255, 77, 79, 0.12)',
+                    unchanged: 'rgba(102, 113, 104, 0.12)'
                 }
             }]
         },
@@ -341,7 +341,7 @@ function renderChart(data) {
                         text: 'Price ($)'
                     },
                     grid: {
-                        color: 'rgba(200, 200, 200, 0.3)'
+                        color: 'rgba(7, 16, 10, 0.08)'
                     }
                 }
             },
@@ -390,9 +390,9 @@ Chart.register({
         dataElementType: 'candlestick',
         datasetElementType: false,
         color: {
-            up: '#26a69a',
-            down: '#ef5350',
-            unchanged: '#999'
+            up: '#00c805',
+            down: '#ff4d4f',
+            unchanged: '#667168'
         }
     },
     scales: {
@@ -411,10 +411,10 @@ class CandlestickElement extends Chart.Element {
         const {x, open, high, low, close} = this.getProps(['x', 'open', 'high', 'low', 'close']);
 
         const isUp = close >= open;
-        const color = isUp ? '#26a69a' : '#ef5350';
+        const color = isUp ? '#00c805' : '#ff4d4f';
 
         ctx.strokeStyle = color;
-        ctx.fillStyle = isUp ? 'rgba(38, 166, 154, 0.1)' : color;
+        ctx.fillStyle = isUp ? 'rgba(0, 200, 5, 0.12)' : color;
         ctx.lineWidth = 1;
 
         // Draw the wick (high-low line)

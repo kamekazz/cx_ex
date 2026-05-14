@@ -5,14 +5,15 @@
 {% block content %}
 <div class="row mb-4">
     <div class="col-12">
-        <div class="card">
+        <div class="card cash-balance-card">
             <div class="card-body">
                 <div class="row align-items-center">
                     <div class="col-md-6">
+                        <div class="page-kicker">Cash</div>
                         <h3>Cash Balance</h3>
-                        <h2 class="text-success">${{ "{:,.2f}".format(balance) }}</h2>
+                        <h2>${{ "{:,.2f}".format(balance) }}</h2>
                     </div>
-                    <div class="col-md-6 text-end">
+                    <div class="col-md-6 text-md-end mt-3 mt-md-0">
                         <a href="{{ url_for('cash.deposit') }}" class="btn btn-success me-2">Deposit</a>
                         <a href="{{ url_for('cash.withdraw') }}" class="btn btn-outline-danger">Withdraw</a>
                     </div>
@@ -69,7 +70,7 @@
             </table>
         </div>
         {% else %}
-        <div class="text-center py-4">
+        <div class="empty-state">
             <h6 class="text-muted">No transactions yet</h6>
             <p>Your cash transactions will appear here.</p>
         </div>

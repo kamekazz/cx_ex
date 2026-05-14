@@ -3,11 +3,17 @@
 {% block title %}Place Order - ZEBRAT TRADING{% endblock %}
 
 {% block content %}
+<div class="page-header">
+    <div class="page-kicker">Trade ticket</div>
+    <h2 class="mb-1">Place a market order</h2>
+    <p class="mb-0 text-white-50">Review the estimated execution value before submitting your simulated order.</p>
+</div>
+
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="mb-0">Place Market Order</h3>
+                <h3 class="mb-0">Order Entry</h3>
             </div>
             <div class="card-body">
                 <form method="POST">
@@ -42,7 +48,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <div class="card bg-light">
+                        <div class="card bg-light border-0">
                             <div class="card-body">
                                 <h6 class="card-title">Order Summary</h6>
                                 <div class="row">
@@ -69,7 +75,7 @@
                         </ul>
                     </div>
                     
-                    <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 flex-wrap">
                         {{ form.submit(class="btn btn-primary") }}
                         <a href="{{ url_for('trading.orders') }}" class="btn btn-secondary">Cancel</a>
                     </div>
@@ -81,12 +87,12 @@
 
 <div class="row mt-4">
     <div class="col-md-12">
-        <div class="card">
+        <div class="card cash-balance-card">
             <div class="card-header">
                 <h5 class="mb-0">Your Current Cash Balance</h5>
             </div>
             <div class="card-body">
-                <h4 class="text-success">${{ "{:,.2f}".format(current_user.get_cash_balance()) }}</h4>
+                <h4>${{ "{:,.2f}".format(current_user.get_cash_balance()) }}</h4>
                 <a href="{{ url_for('cash.deposit') }}" class="btn btn-sm btn-outline-primary">Add Funds</a>
             </div>
         </div>
